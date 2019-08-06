@@ -19,7 +19,7 @@ public class GUIDiamondShop implements IInventory {
 
 
     public Inventory getInventory() {
-        CustomInventory inventory = new CustomInventory(this, 54, "Diamond Shop", new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7));
+        CustomInventory inventory = new CustomInventory(this, 27, "Diamond Shop", new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7));
 
 
 

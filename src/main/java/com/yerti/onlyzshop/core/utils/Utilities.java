@@ -1,12 +1,19 @@
 package com.yerti.onlyzshop.core.utils;
 
 import com.yerti.onlyzshop.utils.Variables;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utilities {
 
@@ -43,6 +50,13 @@ public class Utilities {
                     if (stack.getType().equals(material)) {
                         if (stack.getAmount() >= amount) {
                             //Success
+
+                            if (stack.getAmount() == amount) {
+                                player.getInventory().remove(stack);
+                                return true;
+                            }
+
+
                             stack.setAmount(stack.getAmount() - amount);
                             return true;
                         }
@@ -52,6 +66,20 @@ public class Utilities {
 
 
         }
+
+        ItemStack stack = new ItemStack(Material.DIAMOND, 1);
+        ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName("Bob Diamond");
+        List<String> lore = new ArrayList<String>();
+        lore.add("This is a diamond.");
+        lore.add("Neat!");
+        meta.setLore(lore);
+        meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        stack.setItemMeta(meta);
+
+
+
 
         Variables.printPrefixMessage(ChatColor.RED + "Not enough diamonds!", player);
         player.playSound(player.getLocation(), Sound.ANVIL_LAND, 1, 1);
